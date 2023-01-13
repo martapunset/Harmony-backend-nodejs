@@ -1,7 +1,7 @@
 const dotenv = require("dotenv");
 const logger = require("loglevel");
 
-dotenv.config();//acceder a las variablesde entorno get, post, put...
+dotenv.config()
 
 logger.enableAll();
 
@@ -19,13 +19,13 @@ const CONFIG = {
       trace: logger.trace,
       debug: logger.debug,
     },
-    //conectamos nuestra URI a la Base de datos
+    
     db: {
       uri: process.env.MONGODB_URI_CLUSTER,
-    } //nuestro archivo de.json ya no  nos hace falta 
-    //creamos el archivo connect.js
+    } 
+    
   },
-  production: { // y otro para testear
+  production: {
     app: {
       PORT: process.env.PORT || 4001,
     },

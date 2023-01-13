@@ -1,7 +1,6 @@
 const albumModel = require('../models/album.model')
 
-const getAllAlbums = async (req, res, next) => { //req=loque se manda, res= la respuesta
-    //console.log('all albums');
+const getAllAlbums = async (req, res, next) => { 
     try {
         const allAlbums = await albumModel.find({}).lean().exec()
 
@@ -17,13 +16,13 @@ const getAllAlbums = async (req, res, next) => { //req=loque se manda, res= la r
 const getAlbumByID = async (req, res, next) => {
     const { id } = req.params
     try {
-        const album = await albumModel.findById(id).lean().exec() //lean y exec metodod de mongoose para optimizar las querys, para k se ejecuten de manera mas rapida
+        const album = await albumModel.findById(id).lean().exec()
 
         res.status(200).send({ status: true, data: album })
     } catch (error) {
         res.status(500).send({ status: false, msg: error.message })
     }
-} //puolpulate para relaciones entre documentis, un autor va atener varios albumes , en el modelo se ve k hay un array[]
+}
 
 const deleteAlbum = async (req, res, next) => {
     const { id } = req.params

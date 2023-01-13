@@ -8,7 +8,6 @@ async function createUser (req, res, next) {
             email,
             password
         })
-        //responderle al cliente (postman)
         res.status(201).send({ status: true, data:user})
     } catch (error) {
         res.status(500).send({status: false, msg: error.message})

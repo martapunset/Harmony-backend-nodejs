@@ -1,4 +1,3 @@
-//cuando me manden un id me lo muestren en consola
 async function checkParam(req, res, next) {
     const { id } = req.params
     try {
