@@ -1,5 +1,5 @@
 const fetch = require('node-fetch-commonjs')
-const config = require('../config/config')
+const config = require('./config/config')
 
 const getAllBooks = async () => {
   try {

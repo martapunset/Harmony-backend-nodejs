@@ -1,27 +1,37 @@
 const express = require('express')
 const helmet = require('helmet')
 const morgan = require('morgan')
-const { json } = require('body-parser')
+const { urlencoded} = require('body-parser')
 const cors = require('cors')
 
-const albumsRoutes = require('./routes/albums.routes')
+//const albumsRoutes = require('./routes/albums.routes')
 //const authorRoutes = require('./routes/author.routes')
-const userRoutes = require('./routes/user.routes')
+const userRouter = require('./routes/user.routes')
 //const errorMiddleware = require('./middlewares/error.middleware')
 
 const app = express()
 
 const corsOptions = {
-  origin: 'http://localhost:3000'
+  origin: 'http://localhost:5173'
 }
-
-app.use(morgan('dev'))
+/*
+app.use(
+  cors({
+    origin: config.development.client.URL,
+  })
+);
+*/
+//app.use(morgan('dev'))
 app.use(helmet())
-app.use(json())
+//app.use(urlencoded())
 app.use(cors(corsOptions))
-app.use('/album', albumsRoutes)
-app.use('/author', authorRoutes)
-app.use('/user', userRoutes)
-app.use(errorMiddleware)
+app.use(express.urlencoded({ extended: true }))
+//app.use('/album', albumsRoutes)
+//app.use('/author', authorRoutes)
+app.use('/user', userRouter)
+//app.use('/public', userRouter)
+//app.use('/private', userRouter)
+
+//app.use(errorMiddleware, authMiddleware)
 
 module.exports = app
