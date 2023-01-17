@@ -37,7 +37,7 @@ const CONFIG = {
       debug: logger.debug,
     },
     db: {
-      url: "http://localhost:4002/albums",
+      url: process.env.BASE_URL + "/albums",
     }
   }
 }
