@@ -8,6 +8,6 @@ const GenreSchema = Schema({
     }
 })
 
-const GenreModel = model("users", GenreSchema)
+const GenreModel = model("genre", GenreSchema)
 
 module.exports = GenreModel
