@@ -7,11 +7,11 @@ const userRoutes = require('./routes/user.routes')
 // const GenreRouter = require('./routes/genre.routes')
 
 const app = express()
-app.use(
-    cors({
-      origin: config.development.client.URL,
-    })
-  );
+// app.use(
+//     cors({
+//       origin: config.development.client.URL,
+//     })
+//   );
 app.use(morgan('dev'))
 app.use(helmet())
 app.use(json())
