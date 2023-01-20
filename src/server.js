@@ -2,18 +2,16 @@ const express = require('express')
 const morgan = require('morgan')
 const helmet = require('helmet')
 const { json } = require('body-parser') 
-
+const cors = require('cors')
 const albumsRoutes = require('./routes/album.routes')
 const userRoutes = require('./routes/user.routes')
 const GenreRouter = require('./routes/genre.routes')
 const artistsRouter = require('./routes/artists.routes')
 
 const app = express()
-// app.use(
-//     cors({
-//       origin: config.development.client.URL,
-//     })
-//   );
+app.use(
+    cors()
+  );
 app.use(morgan('dev'))
 app.use(helmet())
 app.use(json({
