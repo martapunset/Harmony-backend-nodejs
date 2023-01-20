@@ -1,10 +1,10 @@
 const artistsRouter = require('express').Router()
-const artistsController = require('../controllers/')
+const artistsController = require('../controllers/artists.controller')
 
 
 artistsRouter
-    .get('/', artistsController)
-    .post('/', artistsController)
-    .delete('/:id', artistsController)
+    .get('/', artistsController.getArtists)
+    .post('/', artistsController.updateArtists)
+    .delete('/:id', artistsController.deleteArtists)
 
-module.exports = artistsRoutes
+module.exports = artistsRouter

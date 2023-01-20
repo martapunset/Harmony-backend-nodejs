@@ -16,7 +16,7 @@ const UserSchema = Schema({
             message: (props) => `The email ${props.value} is not valid`
         }
     },
-    password: {
+    password: { //foto 
         type: String,
         required: [true, 'The password is required'],
         minlength: [8, 'The password is too short']
