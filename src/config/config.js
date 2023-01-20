@@ -10,11 +10,7 @@ const ENV = process.env.NODE_ENV || 'development'
 const CONFIG = {
   development: {
     app: {
-<<<<<<< HEAD
       PORT: process.env.PORT || 4000
-=======
-      PORT: process.env.PORT || 4001,
->>>>>>> pruebaback
     },
     logger: {
       warn: logger.warn,
