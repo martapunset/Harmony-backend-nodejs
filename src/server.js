@@ -1,37 +1,28 @@
 const express = require('express')
-const helmet = require('helmet')
 const morgan = require('morgan')
-const { urlencoded} = require('body-parser')
-const cors = require('cors')
+const helmet = require('helmet')
+const { json } = require('body-parser') 
 
-//const albumsRoutes = require('./routes/albums.routes')
-//const authorRoutes = require('./routes/author.routes')
-const userRouter = require('./routes/user.routes')
-//const errorMiddleware = require('./middlewares/error.middleware')
+const albumsRoutes = require('./routes/album.routes')
+const userRoutes = require('./routes/user.routes')
+const GenreRouter = require('./routes/genre.routes')
+const artistsRouter = require('./routes/artists.routes')
 
 const app = express()
-
-const corsOptions = {
-  origin: 'http://localhost:5173'
-}
-/*
-app.use(
-  cors({
-    origin: config.development.client.URL,
-  })
-);
-*/
-//app.use(morgan('dev'))
+// app.use(
+//     cors({
+//       origin: config.development.client.URL,
+//     })
+//   );
+app.use(morgan('dev'))
 app.use(helmet())
-//app.use(urlencoded())
-app.use(cors(corsOptions))
-app.use(express.urlencoded({ extended: true }))
-//app.use('/album', albumsRoutes)
-//app.use('/author', authorRoutes)
-app.use('/user', userRouter)
-//app.use('/public', userRouter)
-//app.use('/private', userRouter)
+app.use(json({
+    limit: '50mb'
+}))
 
-//app.use(errorMiddleware, authMiddleware)
+app.use('/album', albumsRoutes) 
+app.use('/user', userRoutes)  
+app.use('/genre', GenreRouter)
+app.use('/artists', artistsRouter)
 
 module.exports = app

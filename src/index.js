@@ -1,12 +1,11 @@
-const app = require('./server')
-
+const connect = require('./database/connect')
+const app = require('./server');
 const config = require('./config/config')
-const connect = require('./db/connect')
 
-connect().then(async function onServerInit () {
-  config.logger.info('DB connected')
-
-  app.listen(config.app.PORT, () => {
-    config.logger.info(`Server running at http://localhost:${config.app.PORT}`)
-  })
+connect().then(async function onServerinit () {
+    config.logger.info('MongoDB connected')
+    
+    app.listen(process.env.PORT, () => {
+        config.logger.info(`Server is running in port ${process.env.PORT}`)
+    }) 
 })
