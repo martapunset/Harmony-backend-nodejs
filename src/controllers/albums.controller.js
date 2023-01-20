@@ -50,7 +50,7 @@ const updateAlbum = async (req, res, next) => {
             { new: true }
         ).lean().exec()
 
-        res.status(200).send({  status: true, data: author })
+        res.status(200).send({ status: true, data: author })
     } catch (error) {
         res.status(500).send({ status: false, msg: error.message })
     }
