@@ -3,7 +3,7 @@ const artistsController = require('../controllers/artists.controller')
 
 
 artistsRouter
-    .get('/', artistsController.getArtists)
+    .get('/', artistsController.getAllArtists)
     .post('/', artistsController.updateArtists)
     .delete('/:id', artistsController.deleteArtists)
 

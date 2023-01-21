@@ -5,6 +5,8 @@ const ArtistsSchema = Schema({
         type: String,
         required: [true, 'The title is super required']
     }
+
+    
 })
 
 const ArtistsModel = model('artists', ArtistsSchema )

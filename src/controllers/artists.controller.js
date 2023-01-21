@@ -1,13 +1,14 @@
 const artistsmodel = require('../models/artists.model')
 
-const getArtists = async (req, res, next) => { 
+const getAllArtists = async (req, res, next) => { 
     try {
-        const allArtists = await artistsmodel.find({}).lean().exec()
-
-        res.status(200).send({ status: true, data: allArtists})
+        const allArtists = artistsmodel.find({})
+        allArtists.exec((error,data)=>{
+            res.status(200).json({ status: true, data: data })
+        })
         //next()
     } catch (error) {
-        req.status(500).send({ status: false, msg: error.message })
+        res.status(500).send({ status: false, msg: error.message })
         //next()
     }
     //next()
@@ -86,4 +87,4 @@ const updateArtists = async (req, res, next) => {
 
 
 
-module.exports = { getArtists, getArtistsByID, updateArtists, deleteArtists }
+module.exports = { getAllArtists, getArtistsByID, updateArtists, deleteArtists }
