@@ -1,21 +1,21 @@
-const { Schema, model } = require('mongoose')
+const { Schema, model } = require("mongoose");
 
 const AlbumSchema = Schema({
-    title: {
-        type: String,
-        required: [true, 'The title is super required']
-    },
-    yearReleased: {
-        type: Number,
-        required: true
-    },
-    genre: {
-        type: String,
-        required: true,
-        trim: true
-    }
-})
+  title: {
+    type: String,
+    required: [true, "The title is super required"],
+  },
+  yearReleased: {
+    type: Number,
+  },
+  thumbnail: {
+    type: String,
+  },
+  totalTracks: {
+    type: Number,
+  },
+});
 
-const AlbumModel = model('album', AlbumSchema)
+const AlbumModel = model("album", AlbumSchema);
 
-module.exports = AlbumModel
+module.exports = AlbumModel;

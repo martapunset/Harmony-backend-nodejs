@@ -1,26 +1,28 @@
-const express = require('express')
-const morgan = require('morgan')
-const helmet = require('helmet')
-const { json } = require('body-parser') 
-const cors = require('cors')
-const albumsRoutes = require('./routes/album.routes')
-const userRoutes = require('./routes/user.routes')
-const GenreRouter = require('./routes/genre.routes')
-const artistsRouter = require('./routes/artists.routes')
+const express = require("express");
+const morgan = require("morgan");
+const helmet = require("helmet");
+const { json } = require("body-parser");
+const cors = require("cors");
+const albumsRoutes = require("./routes/album.routes");
+const userRoutes = require("./routes/user.routes");
+const GenreRouter = require("./routes/genre.routes");
+const artistsRouter = require("./routes/artists.routes");
+const tracksRouter = require("./routes/track.routes");
 
-const app = express()
+const app = express();
+app.use(cors());
+app.use(morgan("dev"));
+app.use(helmet());
 app.use(
-    cors()
-  );
-app.use(morgan('dev'))
-app.use(helmet())
-app.use(json({
-    limit: '50mb'
-}))
+  json({
+    limit: "50mb",
+  })
+);
 
-app.use('/album', albumsRoutes) 
-app.use('/user', userRoutes)  
-app.use('/genre', GenreRouter)
-app.use('/artists', artistsRouter)
+app.use("/album", albumsRoutes);
+app.use("/user", userRoutes);
+app.use("/genre", GenreRouter);
+app.use("/artists", artistsRouter);
+app.use("/tracks", tracksRouter);
 
-module.exports = app
+module.exports = app;
