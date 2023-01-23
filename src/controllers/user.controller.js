@@ -61,4 +61,23 @@ const getUserID = async (req, res, next) => {
   }
 };
 
-module.exports = { getAllUsers, createUser, getUserID, updateUser };
+const getUserByEmail = async (req, res, next) => {
+  const { email }  = req.body  //receive email from clientapp POST method
+
+  try {
+    const user = await userModel.findOne({ email } ).lean().exec();
+    if (user) {
+      res.status(200).send({ status: true, data: user });
+      console.log("user from DB, backend response", user)
+    }
+    else {
+       createUser(user)
+     }
+ 
+  } catch (error) {
+    res.status(500).send({ status: false, msg: error.message });
+    console.log("Get user by email fail")
+  }
+};
+
+module.exports = { getAllUsers, createUser, getUserID, updateUser, getUserByEmail };
