@@ -1,16 +1,16 @@
 const dotenv = require("dotenv");
 const logger = require("loglevel");
 
-dotenv.config()
+dotenv.config();
 
 logger.enableAll();
 
-const ENV = process.env.NODE_ENV || 'development'
+const ENV = process.env.NODE_ENV || "development";
 
 const CONFIG = {
   development: {
     app: {
-      PORT: process.env.PORT || 4000
+      PORT: process.env.PORT || 4000,
     },
     logger: {
       warn: logger.warn,
@@ -19,11 +19,10 @@ const CONFIG = {
       trace: logger.trace,
       debug: logger.debug,
     },
-    
+
     db: {
       uri: process.env.MONGODB_URI_CLUSTER,
-    } 
-    
+    },
   },
   production: {
     app: {
@@ -38,8 +37,8 @@ const CONFIG = {
     },
     db: {
       url: process.env.BASE_URL + "/album",
-    }
-  }
-}
+    },
+  },
+};
 
 module.exports = CONFIG[ENV];

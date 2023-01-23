@@ -1,28 +1,42 @@
-const { Schema, model } = require('mongoose')
-const validator = require('validator')
+const { Schema, model } = require("mongoose");
+const validator = require("validator");
 
 const UserSchema = Schema({
-    firstName: {
-        type: String,
-        required: [true, "the firstname is required"]
-    },
-    email: {
-        type: String,
-        required: [true, 'The email is required'],
-        trim: true,
-        unique: true,
-        validate: {
-            validator: (value) => validator.isEmail(value),
-            message: (props) => `The email ${props.value} is not valid`
-        }
-    },
-    password: { //foto 
-        type: String,
-        required: [true, 'The password is required'],
-        minlength: [8, 'The password is too short']
-    }
-})
+  firstName: {
+    type: String,
+    required: [true, "the firstname is required"],
+  },
 
-const UserModel = model("users", UserSchema)
+  lastName: {
+    type: String,
+    required: [true, "the lastname is required"],
+  },
 
-module.exports = UserModel
+  userName: {
+    type: String,
+    unique: true,
+  },
+
+  email: {
+    type: String,
+    required: [true, "The email is required"],
+    trim: true,
+    unique: true,
+    validate: {
+      validator: (value) => validator.isEmail(value),
+      message: (props) => `The email ${props.value} is not valid`,
+    },
+  },
+
+  picture: {
+    type: String,
+  },
+
+  following: [{ userId: String }],
+
+  followedBy: [{ userId: String }],
+});
+
+const UserModel = model("users", UserSchema);
+
+module.exports = UserModel;
