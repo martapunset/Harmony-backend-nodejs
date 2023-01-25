@@ -1,9 +1,18 @@
-const playlistRouter = require("express").Router();
-const playlistController = require("../../controllers/playlist.controller");
+const express = require("express");
+const {
+  postPlaylist,
+  getAllPlaylists,
+  getPlaylistById,
+  deletePlaylist,
+  patchPlaylist,
+} = require("../../controllers/playlist.controller");
+const { checkJwt } = require("../../middlewares/check.middleware");
+const router = express.Router();
+router
+  .get("/", getAllPlaylists)
+  .get("/:id", getPlaylistById)
+  .post("/:id", postPlaylist)
+  .delete("/:id", deletePlaylist)
+  .patch("/:id", patchPlaylist);
 
-playlistRouter
-  .get("/", playlist.controller.getPlaylists)
-  .post("/", playlist.controller.updatePlaylist)
-  .delete("/:id", playlist.controller.deletePlaylist);
-
-module.exports = playlistRouter;
+module.exports = router;

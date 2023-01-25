@@ -3,7 +3,6 @@ const Album = require("./albumModel");
 const Playlist = require("./playlistModel");
 const Track = require("./trackModel");
 const Genre = require("./genreModel");
-const Mood = require("./moodModel");
 
 module.exports = {
   User,
@@ -11,5 +10,4 @@ module.exports = {
   Track,
   Playlist,
   Genre,
-  Mood,
 };

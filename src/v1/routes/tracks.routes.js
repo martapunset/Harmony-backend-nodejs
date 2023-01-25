@@ -5,15 +5,15 @@ const {
   getPlaylistById,
   deletePlaylist,
   patchPlaylist,
-} = require("../../controllers/playlists.controller");
-const { checkJwt } = require("../../middlewares/checkJwt.middleware");
+} = require("../../controllers/playlist.controller");
+const { checkJwt } = require("../../middlewares/check.middleware");
 const router = express.Router();
 router
-  .get("/", checkJwt, getAllPlaylists)
-  .get("/:id", checkJwt, getPlaylistById)
-  .post("/:id", checkJwt, postPlaylist)
-  .delete("/:id", checkJwt, deletePlaylist)
-  .patch("/:id", checkJwt, patchPlaylist);
+  .get("/", getAllPlaylists)
+  .get("/:id", getPlaylistById)
+  .post("/:id", postPlaylist)
+  .delete("/:id", deletePlaylist)
+  .patch("/:id", patchPlaylist);
 
 module.exports = router;
 

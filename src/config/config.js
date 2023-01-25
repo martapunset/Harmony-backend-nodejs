@@ -3,8 +3,6 @@ require("dotenv").config();
 // DB connection
 const PORT = process.env.PORT || 4000;
 const DB = process.env.MONGO_URI;
-const DB_TEST = process.env.MONGO_URI_TEST;
-
 // Auth0
 const AUTH0_AUDIENCE = process.env.AUTH0_AUDIENCE;
 const AUTH0_ISSUER = process.env.AUTH0_ISSUER;
@@ -19,7 +17,7 @@ const CLOUD_SECRET = process.env.CLOUD_SECRET;
 
 module.exports = {
   PORT,
-  DB: DB_TEST,
+  DB,
   AUTH0_AUDIENCE,
   AUTH0_ISSUER,
   APP_ORIGIN,
