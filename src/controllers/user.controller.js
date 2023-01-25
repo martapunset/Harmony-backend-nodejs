@@ -71,31 +71,6 @@ const getUserID = async (req, res, next) => {
     res.status(500).send({ status: false, msg: error.message });
   }
 };
-/*
-const getUserByEmail = async (req, res, next) => {
-  const { email }  = req.body  //receive email from clientapp POST method
-  //const user=req.body
-//  console.log(req.body)
-  try {
-    const user = await userModel.findOne({ email } ).lean().exec();
-    if (user) {
-      console.log("user exists from DB, backend response", user)
-      res.status(200).send({ status: true, data: user });
-      
-    } else {
-      console.log("user doesnt exist in DB")
-      res.status(400).send({ message: "User doesnt exist in DB. Need to be created" });
-     
-    }
-   
- 
-  } catch (error) {
-    res.status(500).send({ status: false, msg: error.message });
-    
-    
-    
-  }
-};
-*/
+
 
 module.exports = { getAllUsers, loginUser, getUserID, updateUser };
