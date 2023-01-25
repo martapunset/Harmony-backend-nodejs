@@ -13,8 +13,8 @@ const { jwtCheck } = require("../middlewares/jwt-middleware");
 
 userRouter
   .get("/", jwtCheck, userController.getAllUsers)
-  .post("/", userController.createUser)
-  .post("/exists",userController.getUserByEmail)
+  .post("/create", userController.loginUser)
+  
   .patch("/:id", userController.updateUser)
   .get("/:id", userController.getUserID);
 

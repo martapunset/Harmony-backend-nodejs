@@ -1,3 +1,4 @@
+const { create } = require("../models/user.models");
 const userModel = require("../models/user.models");
 
 const getAllUsers = async (req, res, next) => {
@@ -9,21 +10,31 @@ const getAllUsers = async (req, res, next) => {
   }
 };
 
-const createUser = async (req, res, next) => {
-  const { firstName, lastName, userName, email } = req.body;
-
+const loginUser = async (req, res, next) => {
+  const { email } = req.body;
+ 
   try {
-    const user = await userModel.create({
-      firstName,
-      lastName,
-      userName,
-      email,
-    });
-    res.status(201).send({ status: true, data: user });
+    const userDBexists = await userModel.findOne({email}).lean().exec();
+    if (userDBexists) {
+      res.status(200).send({ status: true, data: userDBexists });
+      
+    } else {
+   
+      const userDB = await userModel.create(req.body)
+      res.status(201).send({ status: true, data: userDB });
+   }
+
+
   } catch (error) {
-    res.status(500).send({ status: false, msg: error.message });
+    
+    res.status(500).send({ status: false, msg: error.message, });
   }
 };
+
+
+
+
+
 
 const updateUser = async (req, res, next) => {
   const { id } = req.params;
@@ -60,24 +71,31 @@ const getUserID = async (req, res, next) => {
     res.status(500).send({ status: false, msg: error.message });
   }
 };
-
+/*
 const getUserByEmail = async (req, res, next) => {
   const { email }  = req.body  //receive email from clientapp POST method
-
+  //const user=req.body
+//  console.log(req.body)
   try {
     const user = await userModel.findOne({ email } ).lean().exec();
     if (user) {
+      console.log("user exists from DB, backend response", user)
       res.status(200).send({ status: true, data: user });
-      console.log("user from DB, backend response", user)
+      
+    } else {
+      console.log("user doesnt exist in DB")
+      res.status(400).send({ message: "User doesnt exist in DB. Need to be created" });
+     
     }
-    else {
-       createUser(user)
-     }
+   
  
   } catch (error) {
     res.status(500).send({ status: false, msg: error.message });
-    console.log("Get user by email fail")
+    
+    
+    
   }
 };
+*/
 
-module.exports = { getAllUsers, createUser, getUserID, updateUser, getUserByEmail };
+module.exports = { getAllUsers, loginUser, getUserID, updateUser };
