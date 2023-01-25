@@ -1,92 +1,254 @@
-const albumModel = require('../models/album.model')
+const mongoose = require("mongoose");
+const { Album } = require("../models");
 
-const getAllAlbums =  (req, res, next) => { 
+const albumController = {
+  getAllAlbums: async (req, res) => {
     try {
-        const allAlbums =  albumModel.find({})
-        allAlbums.exec((error,data)=>{
-            res.status(200).json({ status: true, data: data })
-        })
+      const albums = await Album.find({})
+        .populate("tracks")
+        .populate("genres")
+        .populate("ownership")
+        .lean();
 
-        
-        //next()
+      if (albums.length < 1) {
+        return res.status(404).send({
+          status: "FALSE",
+          message: `The DB is currently empty`,
+        });
+      }
+
+      res.status(200).send(albums);
     } catch (error) {
-        req.status(500).send({ status: false, msg: error.message })
-        //next()
+      res.status(400).send(error.message);
     }
-    //next()
-}
+  },
+  getAlbumById: async (req, res) => {
+    const {
+      body,
+      params: { id },
+    } = req;
 
-const getAlbumByID = async (req, res, next) => {
-    const { id } = req.params
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).send({
+        status: "FALSE",
+        message: `${id} is an invalid ID`,
+      });
+    }
     try {
-        const album = await albumModel.findById(id).lean().exec()
+      const album = await Album.findById(id)
+        .populate("tracks")
+        .populate("genres")
+        .populate("ownership")
+        .lean();
 
-        res.status(200).send({ status: true, data: album })
+      if (!album) {
+        return res.status(404).send({
+          status: "FALSE",
+          message: `Album ${id} was not found`,
+        });
+      }
+
+      res.status(200).send(album);
     } catch (error) {
-        res.status(500).send({ status: false, msg: error.message })
+      res.status(400).send(error.message);
     }
-}
+  },
 
-const deleteAlbum = async (req, res, next) => {
-    const { id } = req.params
+  postAlbum: async (req, res) => {
+    const {
+      body,
+      params: { id },
+    } = req;
+
+    if (!body.img) {
+      body.img =
+        "http://icons.iconseeker.com/png/fullsize/music-notes/note-yellow.png";
+    }
+
     try {
-        const album = await albumModel.findOneAndDelete({ _id: id })
+      const albumExists = await Album.findOne({
+        name: body.name,
+        ownership: body.ownership[0],
+      });
+      if (albumExists) {
+        res.status(400).send({
+          status: false,
+          massage: "Album already exist",
+        });
+      }
+      if (body.ownership) {
+        console.log(id, typeof body.ownership);
 
-        res.status(200).send({ status: true, data: album._id })
+        const album = await Album.create({ ...body });
+        res.status(201).send({
+          status: "Album created collab 2",
+          data: album,
+        });
+      } else {
+        console.log("1 collab");
+        const album = await Album.create({ ...body });
+        res.status(201).send({
+          status: "Album created 1",
+          data: album,
+        });
+      }
     } catch (error) {
-        res.status(500).send({ status: false, msg: error.message  })
+      res.status(400).send(error.message);
     }
-}
+  },
+  deleteAlbum: async (req, res) => {
+    const {
+      params: { id },
+    } = req;
 
-const updateAlbum = async (req, res, next) => {
-    const { id } = req.params
-    const { ...fields } = req.body
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).send({
+        status: "FALSE",
+        message: `Album ${id} is invalid`,
+      });
+    }
 
     try {
-        const author = await albumModel.findOneAndUpdate(
-            { _id: id },
-            {
-                $set: {
-                    ...fields
-                }
-            },
-            { new: true }
-        ).lean().exec()
+      const album = await Album.findByIdAndDelete(id);
 
-        res.status(200).send({ status: true, data: author })
+      if (!album) {
+        res.status(404).send({
+          status: "FALSE",
+          message: `Album ${id} was not found`,
+        });
+      }
+
+      res.status(200).send(album);
     } catch (error) {
-        res.status(500).send({ status: false, msg: error.message })
+      res.status(400).send(error.message);
     }
-}
+  },
+  patchAlbum: async (req, res) => {
+    const {
+      params: { id },
+      body,
+    } = req;
 
-const createAlbum = async (req, res, next) => {
-    const { id } = req.params
-    const { title, yearReleased, genre } = req.body
-    //console.log(body);
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).send({
+        status: "FALSE",
+        message: `Album ${id} is invalid`,
+      });
+    }
+
     try {
-        const newAlbum = await albumModel.create({
-            title,
-            yearReleased,
-            genre
-        })
+      const album = await Album.findByIdAndUpdate({ _id: id }, { ...body });
 
-        if (id) {
-            await authorModel
-                .updateOne(
-                    { _id: id },
-                    { $push: { albums: newAlbum._id } }
-                )
-        }
-
-        res.status(201).send({ status: true, data: newAlbum._id })
-        //next()
+      if (!album) {
+        res.status(404).send({
+          status: "FALSE",
+          message: `Album ${id} was not found`,
+        });
+      }
+      res.status(201).send({
+        status: "OK",
+        message: `Album ${id} updated successfully`,
+      });
     } catch (error) {
-        req.status(500).send({ status: false, msg: error.message })
-        //next()
+      res.status(400).send(error.message);
     }
-    //next()
-}
+  },
+};
 
+module.exports = {
+  getAllAlbums: albumController.getAllAlbums,
+  getAlbumById: albumController.getAlbumById,
+  postAlbum: albumController.postAlbum,
+  deleteAlbum: albumController.deleteAlbum,
+  patchAlbum: albumController.patchAlbum,
+};
 
+// const albumModel = require('../models/album.model')
 
-module.exports = { getAllAlbums, createAlbum, getAlbumByID, updateAlbum, deleteAlbum }
+// const getAllAlbums =  (req, res, next) => {
+//     try {
+//         const allAlbums =  albumModel.find({})
+//         allAlbums.exec((error,data)=>{
+//             res.status(200).json({ status: true, data: data })
+//         })
+
+//         //next()
+//     } catch (error) {
+//         req.status(500).send({ status: false, msg: error.message })
+//         //next()
+//     }
+//     //next()
+// }
+
+// const getAlbumByID = async (req, res, next) => {
+//     const { id } = req.params
+//     try {
+//         const album = await albumModel.findById(id).lean().exec()
+
+//         res.status(200).send({ status: true, data: album })
+//     } catch (error) {
+//         res.status(500).send({ status: false, msg: error.message })
+//     }
+// }
+
+// const deleteAlbum = async (req, res, next) => {
+//     const { id } = req.params
+//     try {
+//         const album = await albumModel.findOneAndDelete({ _id: id })
+
+//         res.status(200).send({ status: true, data: album._id })
+//     } catch (error) {
+//         res.status(500).send({ status: false, msg: error.message  })
+//     }
+// }
+
+// const updateAlbum = async (req, res, next) => {
+//     const { id } = req.params
+//     const { ...fields } = req.body
+
+//     try {
+//         const author = await albumModel.findOneAndUpdate(
+//             { _id: id },
+//             {
+//                 $set: {
+//                     ...fields
+//                 }
+//             },
+//             { new: true }
+//         ).lean().exec()
+
+//         res.status(200).send({ status: true, data: author })
+//     } catch (error) {
+//         res.status(500).send({ status: false, msg: error.message })
+//     }
+// }
+
+// const createAlbum = async (req, res, next) => {
+//     const { id } = req.params
+//     const { title, yearReleased, genre } = req.body
+//     //console.log(body);
+//     try {
+//         const newAlbum = await albumModel.create({
+//             title,
+//             yearReleased,
+//             genre
+//         })
+
+//         if (id) {
+//             await authorModel
+//                 .updateOne(
+//                     { _id: id },
+//                     { $push: { albums: newAlbum._id } }
+//                 )
+//         }
+
+//         res.status(201).send({ status: true, data: newAlbum._id })
+//         //next()
+//     } catch (error) {
+//         req.status(500).send({ status: false, msg: error.message })
+//         //next()
+//     }
+//     //next()
+// }
+
+// module.exports = { getAllAlbums, createAlbum, getAlbumByID, updateAlbum, deleteAlbum }
