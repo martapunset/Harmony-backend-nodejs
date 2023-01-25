@@ -18,4 +18,4 @@ async function doubleCheckParam(req, res, next) {
     }
 }
 
-module.exports = { chechParam, doubleCheckParam }
+module.exports = { checkParam, doubleCheckParam }

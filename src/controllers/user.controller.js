@@ -1,54 +1,40 @@
-// <<<<<<< HEAD
-
-// async function privatePing(req, res, next) {
-//     console.log('privada');
-//     return res.status(200).json({
-//         msg: 'Back logueado dice: Bienvenido a Harmony'
-//     })
-// }
-//   async function publicPing (req, res, next) {
-//     console.log('publica');
-//     return res.status(200).json({
-//         msg: 'Back dice: No hace falta que te loguees'
-//     })
-
-// }
-//   module.exports={publicPing, privatePing}
-
-// =======
+const { create } = require("../models/user.models");
 const userModel = require("../models/user.models");
 
 const getAllUsers = async (req, res, next) => {
-  const { firstName, lastName, userName, email } = req.body;
-
   try {
-    const user = await userModel.find({
-      firstName,
-      lastName,
-      userName,
-      email,
-    });
-    res.status(201).send({ status: true, data: user });
+    const user = await userModel.find({});
+    res.status(201).json({ status: "success", msg: "All Users", user });
   } catch (error) {
-    res.status(500).send({ status: false, msg: error.message });
+    res.status(500).send({ status: "fail", msg: error.message });
   }
 };
 
-const createUser = async (req, res, next) => {
-  const { firstName, lastName, userName, email } = req.body;
-
+const loginUser = async (req, res, next) => {
+  const { email } = req.body;
+ 
   try {
-    const user = await userModel.create({
-      firstName,
-      lastName,
-      userName,
-      email,
-    });
-    res.status(201).send({ status: true, data: user });
+    const userDBexists = await userModel.findOne({email}).lean().exec();
+    if (userDBexists) {
+      res.status(200).send({ status: true, data: userDBexists });
+      
+    } else {
+   
+      const userDB = await userModel.create(req.body)
+      res.status(201).send({ status: true, data: userDB });
+   }
+
+
   } catch (error) {
-    res.status(500).send({ status: false, msg: error.message });
+    
+    res.status(500).send({ status: false, msg: error.message, });
   }
 };
+
+
+
+
+
 
 const updateUser = async (req, res, next) => {
   const { id } = req.params;
@@ -86,4 +72,5 @@ const getUserID = async (req, res, next) => {
   }
 };
 
-module.exports = { getAllUsers, createUser, getUserID, updateUser };
+
+module.exports = { getAllUsers, loginUser, getUserID, updateUser };
