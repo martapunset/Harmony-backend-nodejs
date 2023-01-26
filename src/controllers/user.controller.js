@@ -66,10 +66,10 @@ const userController = {
   postUser: async (req, res) => {
     const { body } = req;
 
-    // if (!body.avatar) {
-    //   body.avatar =
-    //     "https://res.cloudinary.com/drghk9p6q/image/upload/v1674474842/Final-Project-MERN/images-orpheus/default-images/Untitled_design_tvsbzn.webp";
-    // }
+    if (!body.avatar) {
+      body.avatar =
+        "https://res.cloudinary.com/drghk9p6q/image/upload/v1674474842/Final-Project-MERN/images-orpheus/default-images/Untitled_design_tvsbzn.webp";
+    }
 
     try {
       const userExists = await User.findOne({ email: body.email }); // Get to userData.email

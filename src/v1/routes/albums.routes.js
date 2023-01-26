@@ -14,10 +14,10 @@ const router = express.Router();
 
 router
   .get("/", getAllAlbums)
-  .get("/:id", getAlbumById)
-  .post("/", postAlbum)
-  .delete("/:id", deleteAlbum)
-  .patch("/:id", patchAlbum);
+  .get("/:id", checkJwt, getAlbumById)
+  .post("/", checkJwt, postAlbum)
+  .delete("/:id", checkJwt, deleteAlbum)
+  .patch("/:id", checkJwt, patchAlbum);
 
 module.exports = router;
 

@@ -9,10 +9,10 @@ const {
 const { checkJwt } = require("../../middlewares/check.middleware");
 const router = express.Router();
 router
-  .get("/", getAllPlaylists)
-  .get("/:id", getPlaylistById)
-  .post("/:id", postPlaylist)
-  .delete("/:id", deletePlaylist)
-  .patch("/:id", patchPlaylist);
+  .get("/", checkJwt, getAllPlaylists)
+  .get("/:id", checkJwt, getPlaylistById)
+  .post("/:id", checkJwt, postPlaylist)
+  .delete("/:id", checkJwt, deletePlaylist)
+  .patch("/:id", checkJwt, patchPlaylist);
 
 module.exports = router;
