@@ -9,7 +9,7 @@ const PlaylistSchema = Schema({
     type: Boolean,
   },
   description: {
-    type: TextBlob,
+    type: String,
   },
   thumbnail: {
     type: String,

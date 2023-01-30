@@ -2,9 +2,9 @@ const tracksmodel = require("../models/track.model");
 
 const getTracks = async (req, res, next) => {
   try {
-    const allArtists = await tracksmodel.find({}).lean().exec();
+    const allTracks = await tracksmodel.find({}).lean().exec();
 
-    res.status(200).send({ status: true, data: allArtists });
+    res.status(200).send({ status: true, data: allTracks});
     //next()
   } catch (error) {
     req.status(500).send({ status: false, msg: error.message });

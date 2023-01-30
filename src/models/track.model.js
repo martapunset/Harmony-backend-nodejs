@@ -17,7 +17,9 @@ const TrackSchema = Schema({
   popularity: {
     type: String,
   },
-  genre: { id: String, name: String },
+  genre: {
+    type: String
+  }, //id: String inside and object { id: String, name: String }
   albums: [{ albumId: String }],
   likedBy: [{ userId: String }],
 });
@@ -25,3 +27,5 @@ const TrackSchema = Schema({
 const TrackModel = model("tracks", TrackSchema);
 
 module.exports = TrackModel;
+
+

@@ -3,7 +3,7 @@ const trackController = require("../controllers/track.controller");
 
 trackRouter
   .get("/", trackController.getTracks)
-  .post("/", trackController.updateTrack)
-  .delete("/:id", trackController.deleteTrack);
+  .post("/update/:id", trackController.updateTrack)
+  .delete("/delete/:id", trackController.deleteTrack);
 
 module.exports = trackRouter;

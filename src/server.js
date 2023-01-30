@@ -3,11 +3,12 @@ const morgan = require("morgan");
 const helmet = require("helmet");
 const { json } = require("body-parser");
 const cors = require("cors");
-const albumsRoutes = require("./routes/album.routes");
-const userRoutes = require("./routes/user.routes");
-const GenreRouter = require("./routes/genre.routes");
+const albumsRouter = require("./routes/album.routes");
+const userRouter = require("./routes/user.routes");
+const genreRouter = require("./routes/genre.routes");
 const artistsRouter = require("./routes/artists.routes");
 const tracksRouter = require("./routes/track.routes");
+const playlistRouter=require("./routes/playlist.routes")
 
 const app = express();
 app.use(cors());
@@ -18,11 +19,11 @@ app.use(
     limit: "50mb",
   })
 );
-
-app.use("/album", albumsRoutes);
-app.use("/user", userRoutes);
-app.use("/genre", GenreRouter);
-app.use("/artists", artistsRouter);
+app.use("/playlist", playlistRouter);
+app.use("/album", albumsRouter);
+app.use("/user", userRouter);
+app.use("/genre", genreRouter);
+app.use("/artist", artistsRouter);
 app.use("/tracks", tracksRouter);
 
 module.exports = app;
