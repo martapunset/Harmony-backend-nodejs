@@ -17,6 +17,9 @@ const PlaylistSchema = Schema({
   numberSongs: {
     type: Number,
   },
+
+  tracks: [{ trackId: String }],
+  
   following: [{ userId: String }],
 
   followedBy: [{ userId: String }],
