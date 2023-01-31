@@ -12,21 +12,21 @@ const getAllUsers = async (req, res, next) => {
 
 const loginUser = async (req, res, next) => {
   const { email } = req.body;
- 
+
   try {
-    const userDBexists = await userModel.findOne({email}).lean().exec();
+    const userDBexists = await userModel.findOne({ email }).lean().exec();
     if (userDBexists) {
       res.status(200).send({ status: true, data: userDBexists });
-      
+
     } else {
-   
+
       const userDB = await userModel.create(req.body)
       res.status(201).send({ status: true, data: userDB });
-   }
+    }
 
 
   } catch (error) {
-    
+
     res.status(500).send({ status: false, msg: error.message, });
   }
 };
@@ -38,7 +38,7 @@ const loginUser = async (req, res, next) => {
 
 const updateUser = async (req, res, next) => {
   const { id } = req.params;
-  const { ...fields } = req.body;
+  const { firstName, lastName, userName, likedTracks, likedPlaylists } = req.body;
 
   try {
     const updatedUser = await userModel
@@ -46,8 +46,14 @@ const updateUser = async (req, res, next) => {
         { _id: id },
         {
           $set: {
-            ...fields,
+            firstName: firstName,
+            lastName: lastName,
+            userName: userName
           },
+          $push: {
+            likedPlaylists: likedPlaylists,
+            likedTracks: likedTracks
+          }
         },
         { new: true }
       )
