@@ -3,7 +3,7 @@ const { Schema, model } = require("mongoose");
 const PlaylistSchema = Schema({
   name: {
     type: String,
-    required: [true, "The name is super required"],
+    // required: [true, "The name is super required"],
   },
   collaborative: {
     type: Boolean,
@@ -18,11 +18,11 @@ const PlaylistSchema = Schema({
     type: Number,
   },
 
-  tracks: [{ trackId: String }],
-  
-  following: [{ userId: String }],
+  tracks: [{ type: Schema.Types.ObjectId, ref: "tracks" }],
 
-  followedBy: [{ userId: String }],
+  // following: [{ userId: String }],
+
+  // followedBy: [{ userId: String }],
 });
 
 const PlaylistModel = model("playlists", PlaylistSchema);

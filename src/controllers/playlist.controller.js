@@ -24,28 +24,21 @@ const deletePlaylist = async (req, res, next) => {
   }
 };
 
-const updatePlaylist = async (req, res, next) => {
+const createPlaylist = async (req, res, next) => {
   const { id } = req.params;
-  const { ...fields } = req.body;
+  const { name, collaborative, description, thumbnail, numberSongs, tracks, following, followedBy } = req.body;
 
   try {
-    const author = await playlistmodel
-      .findOneAndUpdate(
-        { _id: id },
-        {
-          $set: {
-            ...fields,
-          },
-        },
-        { new: true }
-      )
-      .lean()
-      .exec();
+    const playlist = await playlistmodel
+      .create({ name, collaborative, description, thumbnail, numberSongs, tracks, following, followedBy }
 
-    res.status(200).send({ status: true, data: author });
+      )
+
+    res.status(200).send({ status: true, data: playlist });
   } catch (error) {
     res.status(500).send({ status: false, msg: error.message });
   }
 };
 
-module.exports = { getPlaylists, updatePlaylist, deletePlaylist };
+module.exports = { getPlaylists, createPlaylist, deletePlaylist };
+// name, collaborative, description, thumbnail, numberSongs, tracks, following, followedBy

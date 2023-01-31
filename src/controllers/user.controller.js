@@ -29,16 +29,28 @@ const loginUser = async (req, res, next) => {
 
 const updateUser = async (req, res, next) => {
   const { id } = req.params;
-  const { ...fields } = req.body;
+  const { firstName, lastName, userName, likedTracks, likedPlaylists } =
+    req.body;
 
   try {
-    if (req.file) {
-      await cloudinary.v2.uploader.upload(req.file.path, {
-        folder: "berners-imgs",
-        use_filename: true,
-        resource_type: "raw",
-      });
-    }
+    const updatedUser = await userModel
+      .findOneAndUpdate(
+        { _id: id },
+        {
+          $set: {
+            firstName: firstName,
+            lastName: lastName,
+            userName: userName,
+          },
+          $push: {
+            likedPlaylists: likedPlaylists,
+            likedTracks: likedTracks,
+          },
+        },
+        { new: true }
+      )
+      .lean()
+      .exec();
 
     // const updatedUser = await userModel
     //   .findOneAndUpdate(
