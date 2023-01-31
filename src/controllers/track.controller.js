@@ -20,7 +20,7 @@ const searchTracks = async (req, res, next) => {
 const {title} = req.query;
 //const { q } = req.params;
   try {
-    const findTracks = await tracksmodel.find({ title: title }).lean().exec();
+    const findTracks = await tracksmodel.find({ title: title}).lean().exec();
       //Do your action here..
   // res.status(200).send({ msg: name });
   
