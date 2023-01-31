@@ -31,9 +31,10 @@ const UserSchema = Schema({
   picture: {
     type: String,
   },
+
   likedTracks: [{ type: Schema.Types.ObjectId, ref: "tracks" }],
 
-  likedPlaylists: [{type: Schema.Types.ObjectId, ref: "playlists" }],
+  likedPlaylists: [{ type: Schema.Types.ObjectId, ref: "playlists" }],
 
   following: [{ userId: String }],
 

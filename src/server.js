@@ -3,12 +3,16 @@ const morgan = require("morgan");
 const helmet = require("helmet");
 const { json } = require("body-parser");
 const cors = require("cors");
+const dotenv = require("dotenv");
+dotenv.config();
+const { cloudinary } = require("./cloudinary");
+
 const albumsRouter = require("./routes/album.routes");
 const userRouter = require("./routes/user.routes");
 const genreRouter = require("./routes/genre.routes");
 const artistsRouter = require("./routes/artists.routes");
 const tracksRouter = require("./routes/track.routes");
-const playlistRouter=require("./routes/playlist.routes")
+const playlistRouter = require("./routes/playlist.routes");
 
 const app = express();
 app.use(cors());
