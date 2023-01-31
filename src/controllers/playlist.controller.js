@@ -30,14 +30,8 @@ const createPlaylist = async (req, res, next) => {
 
   try {
     const playlist = await playlistmodel
-      .create({ name, collaborative, description, thumbnail, numberSongs, tracks, following, followedBy },
-        { _id: id }
-        // {
-        //   $set: {
-        //     ...fields,
-        //   },
-        // },
-        // { new: true }
+      .create({ name, collaborative, description, thumbnail, numberSongs, tracks, following, followedBy }
+
       )
 
     res.status(200).send({ status: true, data: playlist });
