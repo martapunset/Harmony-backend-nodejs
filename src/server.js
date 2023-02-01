@@ -19,11 +19,15 @@ app.use(
     limit: "50mb",
   })
 );
-app.use("/playlist", playlistRouter);
-app.use("/album", albumsRouter);
+app.use("/playlists", playlistRouter);
+app.use("/albums", albumsRouter);
 app.use("/user", userRouter);
-app.use("/genre", genreRouter);
-app.use("/artist", artistsRouter);
+app.use("/genres", genreRouter);
+app.use("/artists", artistsRouter);
 app.use("/tracks", tracksRouter);
 
 module.exports = app;
+
+
+
+
