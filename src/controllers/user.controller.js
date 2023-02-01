@@ -71,8 +71,7 @@ const getUserID = async (req, res, next) => {
 
   try {
     const user = await userModel.findById(id)
-      .populate("likedTracks")
-      
+      .populate("likedTracks") //field of user that has extern data
       .lean().exec();
 
     res.status(200).send({ status: true, data: user.likedTracks });
