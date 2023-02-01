@@ -21,7 +21,7 @@ const TrackSchema = Schema({
     type: String
   }, //id: String inside and object { id: String, name: String }
   albums: [{ albumId: String }],
-  likedBy: [{ userId: String }],
+  //likedBy: [{ userId: String }],
 });
 
 const TrackModel = model("tracks", TrackSchema);
