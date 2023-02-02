@@ -1,24 +1,19 @@
 {
   "name": "music-player-final-project-backend",
   "version": "1.0.0",
-  "description": "Harmony MusicApp is a approch to real world spotify app with some common features",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./src/index.js"
+    "start": "nodemon ./src/index.js",
+    "dev": "concurrently \"nodemon ./src/index.js\" \"json-server --watch ./src/database/db.json --port 4002\"",
+    "server": "json-server --watch ./src/database/db.json --port 4002"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/martapunset/music-player-final-project-backend.git"
   },
-  "keywords": [
-    "Nodejs",
-    "Expressjs",
-    "Helmet",
-    "Dotenv",
-    "Mongodb",
-    "Cors"
-  ],
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {

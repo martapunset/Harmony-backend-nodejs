@@ -17,19 +17,23 @@ const loginUser = async (req, res, next) => {
     const userDBexists = await userModel.findOne({ email }).lean().exec();
     if (userDBexists) {
       res.status(200).send({ status: true, data: userDBexists });
+
     } else {
-      const userDB = await userModel.create(req.body);
+
+      const userDB = await userModel.create(req.body)
       res.status(201).send({ status: true, data: userDB });
     }
+
+
   } catch (error) {
-    res.status(500).send({ status: false, msg: error.message });
+
+    res.status(500).send({ status: false, msg: error.message, });
   }
 };
 
 const updateUser = async (req, res, next) => {
   const { id } = req.params;
-  const { firstName, lastName, userName, likedTracks, likedPlaylists } =
-    req.body;
+  const { firstName, lastName, userName, likedTracks, likedPlaylists } = req.body;
 
   try {
     const updatedUser = await userModel
@@ -39,38 +43,19 @@ const updateUser = async (req, res, next) => {
           $set: {
             firstName: firstName,
             lastName: lastName,
-            userName: userName,
+            userName: userName
           },
           $push: {
             likedPlaylists: likedPlaylists,
-            likedTracks: likedTracks,
-          },
+            likedTracks: likedTracks
+          }
         },
         { new: true }
       )
       .lean()
       .exec();
 
-    async (err, result) => {
-      if (err) {
-        console.log(err);
-        res.status(500).json({ message: "Something went wrong" });
-      } else {
-        const newuser = new userModel({
-          firstName: req.body.firstName,
-          lastName: req.body.lastName,
-          picture: result.picture,
-        });
-
-        await newuser.save();
-        const allUsers = await userModel.find();
-        res.status(200).send({
-          message: "User added successfully",
-          success: true,
-          data: allUsers,
-        });
-      }
-    };
+    res.status(200).send({ status: true, data: updatedUser });
   } catch (error) {
     res.status(500).send({ status: false, msg: error.message });
   }
@@ -80,22 +65,15 @@ const getUserID = async (req, res, next) => {
   const { id } = req.params;
 
   try {
-<<<<<<< HEAD
-    const user = await userModel
-      .findById(id)
-      .populate("likedTracks") //field of user that has extern data
-      .lean()
-      .exec();
-=======
     const user = await userModel.findById(id)
       .populate("likedTracks") 
       .lean().exec();
->>>>>>> 5ff02aa9636b32650a86af8339a90715e3e73c72
 
     res.status(200).send({ status: true, data: user.likedTracks });
   } catch (error) {
     res.status(500).send({ status: false, msg: error.message });
   }
 };
+
 
 module.exports = { getAllUsers, loginUser, getUserID, updateUser };

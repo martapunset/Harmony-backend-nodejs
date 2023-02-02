@@ -31,7 +31,6 @@ const UserSchema = Schema({
   picture: {
     type: String,
   },
-
   likedTracks: [{ type: Schema.Types.ObjectId, ref: "tracks" }],
 
   likedPlaylists: [{ type: Schema.Types.ObjectId, ref: "playlists" }],
