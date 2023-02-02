@@ -5,6 +5,7 @@ const { json } = require("body-parser");
 const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
+
 const { cloudinary } = require("./cloudinary");
 
 const albumsRouter = require("./routes/album.routes");
@@ -31,7 +32,3 @@ app.use("/artists", artistsRouter);
 app.use("/tracks", tracksRouter);
 
 module.exports = app;
-
-
-
-
