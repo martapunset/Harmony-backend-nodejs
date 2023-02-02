@@ -5,12 +5,9 @@ const getPlaylists = async (req, res, next) => {
     const allArtists = await playlistmodel.find({}).lean().exec();
 
     res.status(200).send({ status: true, data: allArtists });
-    //next()
   } catch (error) {
     req.status(500).send({ status: false, msg: error.message });
-    //next()
   }
-  //next()
 };
 
 const deletePlaylist = async (req, res, next) => {
@@ -41,4 +38,4 @@ const createPlaylist = async (req, res, next) => {
 };
 
 module.exports = { getPlaylists, createPlaylist, deletePlaylist };
-// name, collaborative, description, thumbnail, numberSongs, tracks, following, followedBy
+

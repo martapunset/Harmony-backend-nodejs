@@ -6,12 +6,9 @@ const getAllArtists = async (req, res, next) => {
         allArtists.exec((error,data)=>{
             res.status(200).json({ status: true, data: data })
         })
-        //next()
     } catch (error) {
         res.status(500).send({ status: false, msg: error.message })
-        //next()
     }
-    //next()
 }
 
 const getArtistsByID = async (req, res, next) => {
@@ -56,35 +53,5 @@ const updateArtists = async (req, res, next) => {
         res.status(500).send({ status: false, msg: error.message })
     }
 }
-
-// const createArtists = async (req, res, next) => {
-//     const { id } = req.params
-//     const { title, yearReleased, genre } = req.body
-//     //console.log(body);
-//     try {
-//         const newArtist= await artistsModel.create({
-//             title,
-//             yearReleased,
-//             genre
-//         })
-
-//         if (id) {
-//             await authorModel
-//                 .updateOne(
-//                     { _id: id },
-//                     { $push: { albums: newAlbum._id } }
-//                 )
-//         }
-
-//         res.status(201).send({ status: true, data: newAlbum._id })
-//         //next()
-//     } catch (error) {
-//         req.status(500).send({ status: false, msg: error.message })
-//         //next()
-//     }
-//     //next()
-// }
-
-
 
 module.exports = { getAllArtists, getArtistsByID, updateArtists, deleteArtists }

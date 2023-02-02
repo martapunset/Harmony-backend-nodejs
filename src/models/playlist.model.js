@@ -19,10 +19,6 @@ const PlaylistSchema = Schema({
   },
 
   tracks: [{ type: Schema.Types.ObjectId, ref: "tracks" }],
-
-  // following: [{ userId: String }],
-
-  // followedBy: [{ userId: String }],
 });
 
 const PlaylistModel = model("playlists", PlaylistSchema);

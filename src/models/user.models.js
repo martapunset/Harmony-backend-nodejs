@@ -35,10 +35,6 @@ const UserSchema = Schema({
   likedTracks: [{ type: Schema.Types.ObjectId, ref: "tracks" }],
 
   likedPlaylists: [{ type: Schema.Types.ObjectId, ref: "playlists" }],
-
-  // following: [{ userId: String }],
-
-  // followedBy: [{ userId: String }],
 });
 
 const UserModel = model("users", UserSchema);
