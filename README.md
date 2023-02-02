@@ -1,10 +1,10 @@
 # Harmony
 
-Harmony is an open community of independent artists and music lovers similar to Spotify, De. Harmony is a streaming music web application for personal use where artists can share their music and discover songs, playlists and artists.
+Harmony is an open community of independent music lovers similar to Spotify, or Deezer. Harmony is a streaming music web application for personal use where users can listen their music and discover songs, playlists and artists.
 
 This project was made by a team of passionate music developers using continuous integration and agile methodologies.
 
-This app has been built with MongoDB, Express, Node, Firebase and Cloudinary on the server side, and React, Redux for the client side.
+This app has been built with MERN stack and some complements like Auth0 to manage the users information. 
 
 ## 🚀 Getting Started
 
@@ -12,7 +12,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## 📋 Requirements
 
-You need to install NodeJs and Install the NPM packages with npm install command. You will also be required to create accounts for: - Firebase - MongoDB Atlas - Cloudinary
+You need to install NodeJs and Install the NPM packages with npm install command. You will also be required to create accounts for: - MongoDB Atlas - Auth0
 
 ## 🔧 Installation
 
@@ -36,10 +36,8 @@ Folder structure 🗂
 │ │ ├── controllers  
 │ │ ├── db  
 │ │ ├── middlewares  
-│ │ ├── models  
-│ │ ├── repositories  
-│ │ ├── routes  
-│ │ ├── services  
+│ │ ├── models   
+│ │ ├── routes   
 │ │ └── utils  
 │ │ └── index.js
 │ │ └── server.js  
@@ -47,7 +45,7 @@ Folder structure 🗂
 
 ### Server-Side with nodeJS 🔐
 
-This back end side is our main API. Here we receive most of the requests that are sent by the front end. This API has the core functionalities of the back end such as the authentication, the database management and the use of other third party services as _cloudinary_. This API also interacts with the other side of our back end.
+This back end side is our main API. Here we receive most of the requests that are sent by the front end. This API has the core functionalities of the back end such as the database management.
 
 # 🗺 Project Journey
 
@@ -75,14 +73,12 @@ Based on Agile methodologies we had daily reviews, sprint plannings and sprint r
 
 ## Main resources for the backend 🧬
 
-<!-- - [Cloudinary](https://cloudinary.com/) -->
 - [Express](https://expressjs.com/)
-<!-- - [Firebase](https://firebase.google.com/) -->
 - [MongoDB](https://www.mongodb.com/)
 - [Mongoose](https://mongoosejs.com/)
 - [Node JS](https://nodejs.org/)
 - [Prettier](https://prettier.io/)
-<!-- - [Eslint](https://eslint.org/) -->
+
 
 ## Support libraries 📚
 
