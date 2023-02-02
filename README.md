@@ -1,5 +1,3 @@
-
-
 # Harmony
 
 Harmony is an open community of independent artists and music lovers similar to that of Spotify or Amazon Music. Musikan is a streaming music web application for personal use where artists can share their music and discover songs, playlists and artists.
@@ -104,9 +102,9 @@ Members of the Harmony group
 <table>
   <tr>
     <td align="center">
-      <a href="github tony">
+      <a href="https://github.com/tonymg1">
         <img
-          src="[https://avatars2.githubusercontent.com/u/85640830?s=90&v=4?s=100](https://avatars.githubusercontent.com/u/99078544?v=4)"
+          src="https://avatars.githubusercontent.com/u/99078544?v=4"
           width="100px;"
           alt=""
         /><br /><sub><b>Antonio Martín Galdeano</b></sub></a
@@ -124,7 +122,7 @@ Members of the Harmony group
         <td align="center">
       <a href="https://github.com/martapunset"
         ><img
-          src="[https://avatars.githubusercontent.com/u/78234738?](https://avatars.githubusercontent.com/u/107318883?v=4)"
+          src="https://avatars.githubusercontent.com/u/107318883?v=4"
           width="100px;"
           alt=""
         /><br /><sub><b>Marta Punset</b></sub></a
