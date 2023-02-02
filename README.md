@@ -62,7 +62,7 @@ This back end side is our main API. Here we receive most of the requests that ar
 
 In order to achieve all of our goals we have implemented the Scrum Agile Methodology. We divided all the process into four separated Sprints contained within 3 weeks, everyone of them with their own goals. To manage those sprints we set daily, sprint plannings and review and sprint retrospective meetings. We used Github Projects to divide our sprints, issues and tasks on boards using the Kanban structure. We also implemented a code review system in order to get all the team connected with all parts of the project.
 
-<a href="https://github.com/martapunset/musicplayer-final-project/projects?query=is%3Aopen">Organization</a>
+<a href="https://github.com/users/martapunset/projects/2">Organization</a>
 
 ## Team Convention 🤝
 
