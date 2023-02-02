@@ -1,6 +1,6 @@
 # Harmony
 
-Harmony is an open community of independent artists and music lovers similar to that of Spotify or Amazon Music. Musikan is a streaming music web application for personal use where artists can share their music and discover songs, playlists and artists.
+Harmony is an open community of independent artists and music lovers similar to Spotify, De. Harmony is a streaming music web application for personal use where artists can share their music and discover songs, playlists and artists.
 
 This project was made by a team of passionate music developers using continuous integration and agile methodologies.
 
