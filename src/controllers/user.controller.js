@@ -31,11 +31,6 @@ const loginUser = async (req, res, next) => {
   }
 };
 
-
-
-
-
-
 const updateUser = async (req, res, next) => {
   const { id } = req.params;
   const { firstName, lastName, userName, likedTracks, likedPlaylists } = req.body;
@@ -71,7 +66,7 @@ const getUserID = async (req, res, next) => {
 
   try {
     const user = await userModel.findById(id)
-      .populate("likedTracks") //field of user that has extern data
+      .populate("likedTracks") 
       .lean().exec();
 
     res.status(200).send({ status: true, data: user.likedTracks });

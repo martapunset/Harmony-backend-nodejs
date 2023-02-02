@@ -5,7 +5,6 @@ const { json } = require("body-parser");
 const cors = require("cors");
 const albumsRouter = require("./routes/album.routes");
 const userRouter = require("./routes/user.routes");
-const genreRouter = require("./routes/genre.routes");
 const artistsRouter = require("./routes/artists.routes");
 const tracksRouter = require("./routes/track.routes");
 const playlistRouter=require("./routes/playlist.routes")
@@ -22,7 +21,6 @@ app.use(
 app.use("/playlists", playlistRouter);
 app.use("/albums", albumsRouter);
 app.use("/user", userRouter);
-app.use("/genres", genreRouter);
 app.use("/artists", artistsRouter);
 app.use("/tracks", tracksRouter);
 

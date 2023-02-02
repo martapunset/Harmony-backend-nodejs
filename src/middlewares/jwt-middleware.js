@@ -7,11 +7,11 @@ const jwtCheck = expressJwt({
         cache: true,
         rateLimit: true,
         jwksRequestsPerMinute: 5,
-        jwksUri: 'https://bernersmusicapp.eu.auth0.com/.well-known/jwks.json'  //issuer+.well.....
+        jwksUri: 'https://bernersmusicapp.eu.auth0.com/.well-known/jwks.json'  
     }),
-    audience: 'https://express.sample', //apis , identifier
-    issuer: 'https://bernersmusicapp.eu.auth0.com/', //aplication , domain
-    algorithms: ['RS256'] //apis
+    audience: 'https://express.sample', 
+    issuer: 'https://bernersmusicapp.eu.auth0.com/', 
+    algorithms: ['RS256'] 
 })
 
 module.exports = { jwtCheck }
