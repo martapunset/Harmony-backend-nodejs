@@ -19,7 +19,13 @@ const searchTracks = async (req, res, next) => {
   const { title } = req.query;
   //const { q } = req.params;
   try {
-    const findTracks = await tracksmodel.find({ title: title }).lean().exec();
+    //  db.inventory.find( { tags: "red" } )
+    //   EmployeeDetails:{$elemMatch:{EmployeePerformanceArea
+
+    const findTracks = await tracksmodel
+      .find({ searchTags: title })
+      .lean()
+      .exec();
     //Do your action here..
     // res.status(200).send({ msg: name });
 
@@ -29,6 +35,7 @@ const searchTracks = async (req, res, next) => {
     res.status(500).send({ status: false, msg: error.message });
     //next()
   }
+
   //next()
 };
 
