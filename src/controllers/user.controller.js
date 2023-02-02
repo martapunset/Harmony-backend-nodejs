@@ -24,17 +24,11 @@ const loginUser = async (req, res, next) => {
       res.status(201).send({ status: true, data: userDB });
     }
 
-
   } catch (error) {
 
     res.status(500).send({ status: false, msg: error.message, });
   }
 };
-
-
-
-
-
 
 const updateUser = async (req, res, next) => {
   const { id } = req.params;
@@ -79,6 +73,5 @@ const getUserID = async (req, res, next) => {
     res.status(500).send({ status: false, msg: error.message });
   }
 };
-
 
 module.exports = { getAllUsers, loginUser, getUserID, updateUser };
