@@ -1,11 +1,16 @@
-const connect = require('./database/connect')
-const app = require('./server');
-const config = require('./config/config')
+const connect = require("./database/connect");
+const app = require("./server");
+const config = require("./config/config");
 
-connect().then(async function onServerinit () {
-    config.logger.info('MongoDB connected')
-    
+const startServer = async () => {
+  try {
+    await connect(config.logger.info("MongoDB connected"));
     app.listen(process.env.PORT, () => {
-        config.logger.info(`Server is running in port ${process.env.PORT}`)
-    }) 
-})
+      config.logger.info(`Server is running in port ${process.env.PORT}`);
+    });
+  } catch (error) {
+    console.log("Someting went wrong, server crashed!");
+  }
+};
+
+startServer();

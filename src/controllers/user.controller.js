@@ -17,23 +17,19 @@ const loginUser = async (req, res, next) => {
     const userDBexists = await userModel.findOne({ email }).lean().exec();
     if (userDBexists) {
       res.status(200).send({ status: true, data: userDBexists });
-
     } else {
-
-      const userDB = await userModel.create(req.body)
+      const userDB = await userModel.create(req.body);
       res.status(201).send({ status: true, data: userDB });
     }
-
-
   } catch (error) {
-
-    res.status(500).send({ status: false, msg: error.message, });
+    res.status(500).send({ status: false, msg: error.message });
   }
 };
 
 const updateUser = async (req, res, next) => {
   const { id } = req.params;
-  const { firstName, lastName, userName, likedTracks, likedPlaylists } = req.body;
+  const { firstName, lastName, userName, likedTracks, likedPlaylists } =
+    req.body;
 
   try {
     const updatedUser = await userModel
@@ -43,12 +39,12 @@ const updateUser = async (req, res, next) => {
           $set: {
             firstName: firstName,
             lastName: lastName,
-            userName: userName
+            userName: userName,
           },
           $push: {
             likedPlaylists: likedPlaylists,
-            likedTracks: likedTracks
-          }
+            likedTracks: likedTracks,
+          },
         },
         { new: true }
       )
@@ -65,15 +61,16 @@ const getUserID = async (req, res, next) => {
   const { id } = req.params;
 
   try {
-    const user = await userModel.findById(id)
-      .populate("likedTracks") 
-      .lean().exec();
+    const user = await userModel
+      .findById(id)
+      .populate("likedTracks")
+      .lean()
+      .exec();
 
     res.status(200).send({ status: true, data: user.likedTracks });
   } catch (error) {
     res.status(500).send({ status: false, msg: error.message });
   }
 };
-
 
 module.exports = { getAllUsers, loginUser, getUserID, updateUser };

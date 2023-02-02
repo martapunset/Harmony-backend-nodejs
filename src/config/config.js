@@ -12,31 +12,15 @@ const CONFIG = {
     app: {
       PORT: process.env.PORT || 4000,
     },
+
     logger: {
       warn: logger.warn,
       info: logger.info,
       error: logger.error,
-      trace: logger.trace,
-      debug: logger.debug,
     },
 
     db: {
       uri: process.env.MONGODB_URI_CLUSTER,
-    },
-  },
-  production: {
-    app: {
-      PORT: process.env.PORT || 4001,
-    },
-    logger: {
-      warn: logger.warn,
-      info: logger.info,
-      error: logger.error,
-      trace: logger.trace,
-      debug: logger.debug,
-    },
-    db: {
-      url: process.env.BASE_URL + "/album",
     },
   },
 };

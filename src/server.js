@@ -7,17 +7,19 @@ const albumsRouter = require("./routes/album.routes");
 const userRouter = require("./routes/user.routes");
 const artistsRouter = require("./routes/artists.routes");
 const tracksRouter = require("./routes/track.routes");
-const playlistRouter=require("./routes/playlist.routes")
+const playlistRouter = require("./routes/playlist.routes");
 
 const app = express();
 app.use(cors());
 app.use(morgan("dev"));
 app.use(helmet());
+
 app.use(
   json({
     limit: "50mb",
   })
 );
+
 app.use("/playlists", playlistRouter);
 app.use("/albums", albumsRouter);
 app.use("/user", userRouter);
@@ -25,7 +27,3 @@ app.use("/artists", artistsRouter);
 app.use("/tracks", tracksRouter);
 
 module.exports = app;
-
-
-
-
