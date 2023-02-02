@@ -1,10 +1,6 @@
-const likedRouter = require('express').Router()
-const likedController = require('../controllers/albums.controller')
+const likedRouter = require("express").Router();
+const likedController = require("../controllers/albums.controller");
 
-likedRouter
-    .get('/liked', likedController.getAllLiked)
-    //Cambiar funciones
-    // .post('/liked', albumsController.createAlbum)
-    // .delete('/liked/:id', albumsController.deleteAlbum)
+likedRouter.get("/liked", likedController.getAllLiked);
 
-module.exports = likedRouter
+module.exports = likedRouter;

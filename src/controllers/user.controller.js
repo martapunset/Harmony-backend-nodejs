@@ -1,6 +1,5 @@
 const { create } = require("../models/user.models");
 const userModel = require("../models/user.models");
-const { cloudinary } = require("../cloudinary");
 
 const getAllUsers = async (req, res, next) => {
   try {
@@ -52,20 +51,6 @@ const updateUser = async (req, res, next) => {
       .lean()
       .exec();
 
-    // const updatedUser = await userModel
-    //   .findOneAndUpdate(
-    //     { _id: id },
-    //     {
-    //       $set: {
-    //         ...fields,
-    //       },
-    //     },
-    //     { new: true }
-    //   )
-    //   .lean()
-    //   .exec();
-    // res.status(200).send({ status: true, data: updatedUser });
-
     async (err, result) => {
       if (err) {
         console.log(err);
@@ -95,9 +80,11 @@ const getUserID = async (req, res, next) => {
   const { id } = req.params;
 
   try {
-    const user = await userModel.findById(id)
+    const user = await userModel
+      .findById(id)
       .populate("likedTracks") //field of user that has extern data
-      .lean().exec();
+      .lean()
+      .exec();
 
     res.status(200).send({ status: true, data: user.likedTracks });
   } catch (error) {
