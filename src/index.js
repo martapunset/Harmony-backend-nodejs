@@ -4,9 +4,10 @@ const config = require("./config/config");
 
 const startServer = async () => {
   try {
-    await connect(config.logger.info("MongoDB connected"));
-    app.listen(process.env.PORT, () => {
-      config.logger.info(`Server is running in port ${process.env.PORT}`);
+    console.log(">>>>>", "Try to connect");
+    connect(config.logger.info("MongoDB connected"));
+    app.listen(config.app.PORT, () => {
+      config.logger.info(`Server is running in port ${config.app.PORT}`);
     });
   } catch (error) {
     console.log("Someting went wrong, server crashed!");
