@@ -4,7 +4,7 @@ const config = require("./config/config");
 
 const startServer = async () => {
   try {
-    console.log(">>>>>", "Try to connect");
+    console.log(">>", "Try to connect");
     connect(config.logger.info("MongoDB connected"));
     app.listen(process.env.PORT, () => {
       config.logger.info(`Server is running in port ${process.env.PORT}`);
