@@ -25,4 +25,4 @@ const CONFIG = {
   },
 };
 
-module.exports = CONFIG[ENV];
+module.exports = {CONFIG,ENV};
