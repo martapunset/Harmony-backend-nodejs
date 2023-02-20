@@ -6,8 +6,8 @@ const startServer = async () => {
   try {
     console.log(">>>>>", "Try to connect");
     connect(config.logger.info("MongoDB connected"));
-    app.listen(config.app.PORT, () => {
-      config.logger.info(`Server is running in port ${config.app.PORT}`);
+    app.listen(process.env.PORT, () => {
+      config.logger.info(`Server is running in port ${process.env.PORT}`);
     });
   } catch (error) {
     console.log("Someting went wrong, server crashed!");
